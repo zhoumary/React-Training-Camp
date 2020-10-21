@@ -36,15 +36,6 @@ function render(vnode, container) {
     return node;
   }
   
-  // nextVal 数据类型 object
-  function updateNode(node, nextVal) {
-    Object.keys(nextVal)
-      .filter(k => k !== "children")
-      .forEach(k => {
-        node[k] = nextVal[k];
-      });
-  }
-  
   // 函数组件处理
   function updateFunctionComponent(vnode) {
     const {type, props} = vnode;
@@ -59,6 +50,15 @@ function render(vnode, container) {
       //child 是vnode，vnode->dom节点，插入到父dom节点中就可以了
       render(child, node);
     }
+  }
+  
+  // nextVal 数据类型 object
+  function updateNode(node, nextVal) {
+    Object.keys(nextVal)
+      .filter(k => k !== "children")
+      .forEach(k => {
+        node[k] = nextVal[k];
+      });
   }
   
   export default {render};
